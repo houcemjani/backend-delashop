@@ -1,0 +1,136 @@
+
+.title{
+   margin-top:24px;
+
+   text-align: center;
+}
+h1{
+  font-weight: bold;
+  cursor: pointer;
+}
+img{
+   width:180px;
+   height:170px;
+}
+
+   .product-item-content {
+       border:none;
+       border-radius: 3px;
+       margin: .3rem;
+       text-align: center;
+       padding: 2rem 0;
+
+   }
+
+
+   .containerProduct{
+      margin:35px 85px;
+
+      width: 100%;
+      text-align: center;
+      margin:30px 8px;
+      height: 300px;
+
+
+   }
+   .containerProduct img{
+
+   width: 70%;
+   width: 200px;
+
+   }
+
+   .product-dots-container{
+      margin:0px;
+      padding: 0;
+   }
+   h4{
+      text-align: center;
+      margin:12px;
+      line-height: 35px;
+   }
+   h5{
+      text-align: center;
+      margin:12px;
+   }
+#discount{
+   color:red;
+}
+#discountPrice{
+    color:red;
+}
+span{
+   text-decoration: line-through red;
+}
+img,h4,h5{
+   cursor: pointer;
+}
+.container-product-list{
+   margin: 20px 40px;
+   display: flex;
+   flex-direction: row;
+   justify-content:space-between;
+   height: 200px;
+
+
+}
+.container-product-list .h4{
+   margin: 80px 20px 80px 40px;
+   width: 30%;
+
+}
+.container-product-list img{
+  margin: 30px 20px 80px 70px;
+
+
+
+}
+.container-product-list .h5{
+   margin: 80px 20px 80px 40px;
+
+}
+.discount{
+   display: flex;
+   flex-direction: row;
+}
+.h4 h4{
+   text-align: left;
+}
+.quantity{
+
+  width:400px;
+}
+.quantity P{
+  margin: 80px 20px 80px 40px;
+  width: 100%;
+  text-align:center;
+
+
+}
+p{
+  margin:12px;
+  line-height: 35px;
+  font-weight: 600;
+  font-size:25px;
+}
+.blueColor{
+  color:blue;
+  text-decoration: none;
+}
+button{
+  position:relative;
+  background-color:aquamarine;
+  color:blue;
+  font-weight: 600;
+  font-size: 22px;
+  cursor: pointer;
+  border: solid black 2px;
+  border-radius: 15px;
+  left:20px;
+  width:60%;
+}
+button:hover{
+  background-color: rgb(81, 243, 162);
+  letter-spacing: 1px;
+  transition: 0.5s;
+}

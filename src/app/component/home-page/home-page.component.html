@@ -1,0 +1,80 @@
+<ngb-carousel [interval]="5000">
+  <ng-template ngbSlide>
+    <div class="divDecouvrir">
+      <div class="image1">
+        <img src="assets/img/slider%20pic.PNG" alt="Random first slide">
+      </div>
+      <div class="btnDecouvrir">
+        <button (click)="navigateToStatusPage('Nouveau')"></button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template ngbSlide>
+    <div class="divPromo">
+      <div class="image1">
+        <img src="assets/img/code%20promo.jpg" alt="Random first slide">
+      </div>
+      <div class="txtPromo">
+        <p>10% de réduction avec le code <span class="promo">"Sport2022"</span></p>
+        <p>*Offre valable jusqu'au 30 Septembre</p>
+      </div>
+    </div>
+  </ng-template>
+</ngb-carousel>
+<form>
+  <div class="title">
+    <h1 (click)="navigateToStatusPage('Tendance')">Tendances</h1>
+  </div>
+  <p-carousel [value]="trendProducts"
+              [numVisible]="5"
+              [numScroll]="5"
+              [circular]="true"
+              [autoplayInterval]="50000"
+              styleClass="custom-carousel" >
+    <ng-template let-product pTemplate="item">
+      <app-product-tile
+              [product]="product"
+              view="gridItem">
+      </app-product-tile>
+    </ng-template>
+  </p-carousel>
+</form>
+<form>
+  <div class="title">
+    <h1 (click)="navigateToStatusPage('Nouveau')">Nouveautés</h1>
+  </div>
+  <p-carousel [value]="newProducts"
+              [numVisible]="5"
+              [numScroll]="5"
+              [circular]="true"
+              [autoplayInterval]="50000"
+
+              styleClass="custom-carousel">
+    <ng-template let-product pTemplate="item">
+      <app-product-tile
+              [product]="product"
+              view="gridItem"
+      ></app-product-tile>
+    </ng-template>
+  </p-carousel>
+</form>
+
+<form>
+  <div class="title">
+    <h1 (click)="navigateToStatusPage('Soldé')">Articles Soldés</h1>
+  </div>
+  <p-carousel [value]="discountedProducts"
+              [numVisible]="5"
+              [numScroll]="5"
+              [circular]="true"
+              [autoplayInterval]="50000"
+              styleClass="custom-carousel">
+    <ng-template let-product pTemplate="item">
+      <app-product-tile
+              [product]="product"
+              view="gridItem">
+      </app-product-tile>
+    </ng-template>
+  </p-carousel>
+</form>

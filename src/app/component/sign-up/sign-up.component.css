@@ -1,0 +1,151 @@
+* {
+    margin: 5px;
+}
+
+.global {
+    width: 40%;
+
+    margin: auto;
+}
+
+h1 {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+
+.global div {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+input {
+    width: 500px;
+    border: solid black;
+    height: 45px;
+    padding: 8px;
+    border-radius: 5px;
+
+}
+
+/*input[type='text'] {*/
+/*    width: 500px;*/
+/*    border: solid black ;*/
+/*    height: 45px;*/
+/*    padding: 8px;*/
+/*    border-radius: 5px;*/
+
+/*}*/
+/*input[type='email'] {*/
+/*    width: 500px;*/
+/*    border: solid black ;*/
+/*    height: 45px;*/
+/*    padding: 8px;*/
+/*    border-radius: 5px;*/
+
+/*}*/
+/*input[type='Date'] {*/
+/*    width: 500px;*/
+/*    border: solid black ;*/
+/*    height: 45px;*/
+/*    padding: 8px;*/
+/*    border-radius: 5px;*/
+/*}*/
+/*input[type='password'] {*/
+/*    width: 500px;*/
+/*    border: solid black ;*/
+/*    height: 45px;*/
+/*    padding: 8px;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+.checkbox {
+    position: relative;
+    border: solid black;
+    width: 40px;
+    height: 12px;
+
+}
+
+.section2 {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 150px;
+
+}
+
+.section1 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    left: -17px;
+}
+
+.sexe {
+    position: relative;
+    left: -197px;
+    margin-bottom: 15px;
+}
+
+input[type=radio] {
+    zoom: 1.5;
+}
+
+
+:host ::ng-deep .p-password input {
+    width: 500px;
+    /*border: solid black ;*/
+}
+
+button {
+    position: relative;
+    left: 0px;
+    width: 250px;
+    height: 45px;
+    /*background-color:aquamarine;*/
+    /*color:blue;*/
+    font-weight: 600;
+    font-size: 22px;
+    cursor: pointer;
+    /*border: solid black 2px;*/
+    border-radius: 15px;
+    margin: 10px 5px;
+}
+
+button:hover {
+    /*background-color: rgb(81, 243, 162);*/
+    letter-spacing: 1px;
+    transition: 0.5s;
+}
+
+.error {
+    border: red solid;
+}
+
+.errorMsg {
+    position: relative;
+    left: 250px;
+}
+
+.message {
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    left:240px;
+}
+
+.message div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 300px;
+}
+.invalid-password{
+    color:red;
+}
+.valid-password{
+    color: #04a96d;
+}

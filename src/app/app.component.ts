@@ -2,8 +2,8 @@ import {Component, OnInit, HostListener} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AppData} from "./settings/app-data";
 import {ProductCart} from './entity/product-cart';
-import {Product} from "./entity/product";
 import {ProductCartItem} from "./entity/product-cart-item";
+import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',
@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   productItems: ProductCartItem[] = [];
 
   constructor(
+      private userService: UserService,
       private router: Router,
       private route: ActivatedRoute,
   ) {
@@ -25,9 +26,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerVisibility = true
-    if (localStorage.getItem('username') !== null) {
-      AppData.username = JSON.parse(JSON.stringify(localStorage.getItem('username')));
-      AppData.userId = +(JSON.parse(JSON.stringify(localStorage.getItem('userId'))));
+    const token = localStorage.getItem('token');
+    if (token !== null) {
+      this.userService.setLoginDetails(token);
     }
     if (localStorage.getItem('CartProducts') !== null) {
       AppData.userCart = new ProductCart();
@@ -40,7 +41,7 @@ export class AppComponent implements OnInit {
 
     this.route.queryParamMap.subscribe((params: any) => {
       this.username = params.params.user;
-      if (params.params.idProduct !== undefined || window.location.pathname == "/admin" /*|| params.params.role == "ADMIN"*/ ) {
+      if (params.params.idProduct !== undefined || window.location.pathname == "/product-manager" || window.location.pathname == "/Sign-in" || window.location.pathname == "/Sign-up") {
         this.headerVisibility = false
       } else {
         this.headerVisibility = true
@@ -65,7 +66,7 @@ export class AppComponent implements OnInit {
       this.router.navigate(["/Sign-in"]);
     } else if (AppData.role === "ADMIN") {
       this.headerVisibility = false;
-      this.router.navigate(["/admin"]);
+      this.router.navigate(["/product-manager"]);
     } else {
       this.headerVisibility = true
     }

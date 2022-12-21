@@ -1,0 +1,110 @@
+*{
+    margin:5px;
+}
+h1{
+    font-weight: bold;
+    text-align: center;
+    margin-top: 100px;
+}
+div{
+    text-align: center;
+}
+
+button{
+    position:relative;
+    /*left:0px; */
+    width: 400px;
+    height: 45px;
+    /*background-color: rgb(37, 204, 204);*/
+    color:white;
+    font-weight: 600;
+    font-size: 22px;
+}
+button:hover{
+    letter-spacing:2px;
+    transition: 0.2s;
+}
+input{
+    width: 400px;
+    border: solid black ;
+    height: 45px;
+    padding: 8px;
+}
+.creercompt{
+    position:relative;
+    left:-140px;
+}
+.mdpoublié{
+    position:relative;
+    left:-123px;
+}
+.mail{
+    position:relative;
+    left:-147px;
+    margin-bottom: 0px;
+}
+.mdp{
+    position:relative;
+    left:-152px;
+    margin-bottom: 0px;
+}
+
+.ou{
+    position: relative;
+    bottom: 15px;
+}
+img{
+    height: 50px;
+}
+.img1{
+    position: relative;
+    left:-80px;
+    margin-bottom: 200px;
+}
+.img2{
+    position: relative;
+    left:80px;
+    margin-bottom: 200px;
+}
+.clickable{
+    cursor: pointer;
+}
+
+.p-password{
+    width: 400px;
+    border: solid black ;
+    height: 45px;
+    padding: 8px;
+}
+.inputStyleClass{
+    border: solid black  2px;
+}
+.input-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.erreur-mail{
+    position:relative;
+    left:-130px;
+}
+.erreur-mdp{
+    position:relative;
+    left:-80px;
+}
+.mp .input-login, form-control.input-login.ng-valid.ng-dirty.ng-touched{
+    background-color:aquamarine;
+    width: 100%;
+}
+:host::ng-deep .p-dialog-content {
+    background-color: #040c23;
+    color:white;
+}
+:host::ng-deep .p-dialog-header{
+    background-color: #040c23;
+    color:yellow;
+}
+:host::ng-deep .p-dialog-footer{
+    background-color: #040c23;
+}
+

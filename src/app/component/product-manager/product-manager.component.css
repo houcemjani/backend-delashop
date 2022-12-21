@@ -1,0 +1,71 @@
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+    height: 5px;
+    display: none;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-content {
+    padding-top: 20px;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+}
+
+input {
+    width: 160px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    border: solid 1px black;
+    text-align: center;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    border: solid 1px black;
+    text-align: center;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > .row-bottom > th {
+    border-bottom: solid 1px black;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr:nth-child(even) > td {
+    background: #CCCC
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr:last-child > th > input {
+    width: 100%;
+    text-align: center;
+    background-color: antiquewhite;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr:last-child > th {
+    padding: 0px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr:first-child > th:last-child {
+    background: #CCCC
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td > {
+    text-align: center;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr:last-child > th > p-dropdown {
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    padding: 0px;
+}
+
+:host ::ng-deep .p-dropdown {
+    width: 100%;
+    text-align: center;
+    background-color: antiquewhite;
+}
+.outOfStock{
+    color:red;
+}
+

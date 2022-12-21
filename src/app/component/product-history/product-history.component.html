@@ -1,0 +1,28 @@
+<p-table #table
+         [value]="productDetail.history"
+         [columns]="cols"
+         [paginator]="true"
+         [rows]="limit"
+         [first]="first"
+         [totalRecords]="totalRecords">
+
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <ng-container *ngFor="let col of columns">
+        <th [style.width]="col.width">{{col.header}}
+        </th>
+      </ng-container>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-history let-columns="columns">
+    <tr>
+      <ng-container *ngFor="let col of columns">
+        <td [ngSwitch]="col.type" [style.width]="col.width">
+          <span *ngSwitchCase="'date'">{{history[col.field] | date:'dd/MM/yyyy'}}</span>
+          <span *ngSwitchCase="'price'" lass="p-text-bold p-ml-2">{{history[col.field] + ' ' + 'TND'}}</span>
+          <span *ngSwitchDefault>{{history[col.field]}}</span>
+        </td>
+      </ng-container>
+    </tr>
+  </ng-template>
+</p-table>

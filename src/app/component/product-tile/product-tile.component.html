@@ -1,0 +1,40 @@
+<div *ngIf="view==='gridItem'" class="product-item">
+  <div class="product-dots-container">
+    <div class="p-mb-3">
+      <div class="containerProduct">
+        <img [src]="'/rest/product-manager/download/'+images[0]" alt="ImageNotFound" (click)="goToProductDetails()">
+        <h4 class="p-mb-1" (click)="goToProductDetails()">{{product.name}}</h4>
+        <h5 *ngIf="product.discountedPrice===null"
+            (click)="goToProductDetails()"
+            class="p-mt-0 p-mb-3" >{{product.price}}TND</h5>
+        <div *ngIf="product.discountedPrice!==null">
+          <h5 (click)="goToProductDetails()" class="p-mt-0 p-mb-3" ><span>{{product.price}}TND</span></h5>
+          <h5 id="discount" class="p-mt-0 p-mb-3" (click)="goToProductDetails()">{{product.discountedPrice}}TND</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="view==='listItem'" class="product-item">
+  <div class="product-dots-container">
+    <div class="p-mb-3">
+      <div class="container-product-list">
+        <div class="image">
+          <img [src]="'/rest/product-manager/download/'+images[0]" alt="ImageNotFound" (click)="goToProductDetails()">
+        </div>
+        <div class="h4">
+          <h4 (click)="goToProductDetails()" class="p-mb-1" >{{product.name}}</h4>
+        </div>
+        <div *ngIf="product.discountedPrice===null" class="h5">
+          <h5 class="p-mt-0 p-mb-3" (click)="goToProductDetails()">{{product.price}}TND</h5>
+        </div>
+        <div *ngIf="product.discountedPrice!==null" class="discount" class="h5">
+          <h5 class="p-mt-0 p-mb-3" (click)="goToProductDetails()"><span>{{product.price}}TND</span></h5>
+          <h5 (click)="goToProductDetails()" id="discountPrice" class="p-mt-0 p-mb-3" >{{product.discountedPrice}}TND</h5>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

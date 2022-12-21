@@ -1,0 +1,89 @@
+<div class="global">
+  <div class="partieImg">
+    <div>
+      <p>{{product.category}}/{{product.type}}/{{product.name}}</p>
+    </div>
+
+    <div>
+      <p-carousel [value]="images"
+                  [autoplayInterval]="5000"
+                  [circular]="false"
+                  [numVisible]="1"
+                  [numScroll]="1">
+        <ng-template pTemplate="item" let-image >
+          <div >
+            <img [src]="'/rest/product-manager/download/'+image"  alt="image not found" class="galleria-img"   />
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+    <div></div>
+  </div>
+  <div class="partieInformation">
+    <fieldset>
+      <legend>Informations</legend>
+      <p>{{product.name}}</p>
+      <p>Référence : {{product.reference}} </p>
+      <p> {{product.price}} TND </p>
+
+      <p><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i
+              class="bi bi-star-half"></i><i class="bi bi-star"></i></p>
+<!--      <p class="avis">{{product.rate}} Avis</p>-->
+      <div class="categorie">
+        <label>Categorie: <span class="productType">{{product.type}}</span> </label>
+      </div>
+      <div>
+        <label>Taille</label>
+        <div>
+          <p-dropdown [options]="sizeOptions"
+                      [(ngModel)]="selectedSize"
+                      [autoDisplayFirst]="false"
+                      placeholder="Select a Size"
+                      [showClear]="true"
+                      styleClass="dd-style"
+                      (onChange)="getColorOptions()"
+                      name="size">
+          </p-dropdown>
+        </div>
+      </div>
+      <div *ngIf="selectedSize!==undefined && selectedSize!==null">
+        <label>Couleur</label>
+        <div>
+          <p-dropdown [options]="colorOptions"
+                      [(ngModel)]="selectedColor"
+                      [autoDisplayFirst]="false"
+                      placeholder="Select a Color"
+                      [showClear]="true"
+                      styleClass="dd-style"
+                      (onChange)="getMaxQuantity()"
+                      name="color">
+          </p-dropdown>
+        </div>
+      </div>
+
+
+      <div *ngIf="selectedColor!==undefined && selectedColor!==null && selectedColor!==''">
+        <div>
+          <div class="quantite">
+            <p>Quantité</p>
+            <input [(ngModel)]="quantity"
+                   [max]="maxQuantity"
+                   name="quantity"
+                   type="number" min="0">
+          </div>
+
+        </div>
+        <div class="btn">
+          <button (click)="addToCart()" pButton label="Ajouter au panier"></button>
+        </div>
+      </div>
+
+    </fieldset>
+  </div>
+</div>
+<div class="apropos">
+  <fieldset class="textblock">
+    <legend>A propos du Produit</legend>
+    <img [src]="product.description" alt="ImageNotFound">
+  </fieldset>
+</div>

@@ -1,0 +1,48 @@
+<div class="container1">
+  <p-toast></p-toast>
+  <div><h1>Votre Panier</h1></div>
+  <div class="No-product" *ngIf="productItems.length===0">Aucun Produit dans le panier </div>
+    <p-table *ngIf="productItems.length>0"
+             [value]="productItems"
+             [scrollable]="true"
+             scrollHeight="flex"
+             selectionMode="single">
+      <ng-template pTemplate="header">
+        <tr>
+          <th [style.flex]="'1 1 160px'"></th>
+          <th [style.flex]="'1 1 350px'">Description</th>
+          <th [style.flex]="'1 1 100px'">Taille</th>
+          <th [style.flex]="'1 1 100px'">Couleur</th>
+          <th [style.flex]="'1 1 140px'">Prix Unitaire</th>
+          <th [style.flex]="'1 1 100px'">Quantité</th>
+          <th [style.flex]="'1 1 100px'">Prix Total</th>
+          <th [style.flex]="'1 1 10px'"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item let-row="rowIndex">
+        <tr [pSelectableRow]="item" (dblclick)="goToProductDetails(item.product)">
+          <td [style.flex]="'1 1 160px'">
+            <img [src]="'/rest/product-manager/download/'+getImage(item.product.imgPath)" alt="">
+          </td>
+          <td [style.flex]="'1 1 350px'">{{item.product.name}}</td>
+          <td [style.flex]="'1 1 100px'">{{item.size}}</td>
+          <td [style.flex]="'1 1 100px'">{{item.color}}</td>
+          <td [style.flex]="'1 1 140px'">{{item.product.price}} TND</td>
+          <td [style.flex]="'1 1 100px'">{{item.quantity}}</td>
+          <td [style.flex]="'1 1 100px'">{{item.getTotalPrice()}} TND</td>
+          <td [style.flex]="'1 1 10px'">
+            <button class="tab-btn delete-btn" pButton (click)="delete(row)"  icon="fa fa-trash-o"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer" >
+        <div class="btnCommande">
+          <button (click)="commander()" pButton label="Commander"></button>
+        </div>
+      </ng-template>
+
+    </p-table>
+
+</div>
+
+

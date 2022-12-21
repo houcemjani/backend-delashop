@@ -1,0 +1,146 @@
+<form #formSignUp="ngForm"
+      class="forms-sample"
+      autocomplete="off">
+  <h1>Créez un compte et connectez-vous à tous <br> nos services</h1>
+  <div class="global">
+    <div>
+      <label for="Nom" class="Nom">Nom</label>
+      <input [(ngModel)]="user.lastName"
+             class="form-control"
+             [ngClass]="{'is-valid':submitted && !invalidUser && formSignUp.controls['Nom'].valid,
+                         'is-invalid':submitted && invalidUser && formSignUp.controls['Nom'].invalid}"
+             type="text"
+             name="Nom"
+             id="Nom"
+             minlength="3"
+             placeholder="Entrez votre Nom"
+             required>
+    </div>
+    <div *ngIf="submitted && invalidUser && formSignUp.controls['Nom'].invalid" [style.color]="'red'" class="invalid-feedback errorMsg">
+      *Le Nom est invalid
+    </div>
+    <div>
+      <label for="firstName" class="prenom">Prénom</label>
+      <input [(ngModel)]="user.firstName"
+             class="form-control"
+             [ngClass]="{'is-valid':submitted && !invalidUser && formSignUp.controls['firstName'].valid,
+                         'is-invalid':submitted && invalidUser && formSignUp.controls['firstName'].invalid}"
+             type="text"
+             id="firstName"
+             name="firstName"
+             placeholder="Entrez votre Nom"
+             minlength="3"
+             required>
+    </div>
+    <div *ngIf="submitted && invalidUser && formSignUp.controls['firstName'].invalid" [style.color]="'red'" class="errorMsg">
+      *Le Prénom est invalid
+    </div>
+    <div>
+      <label for="Email" class="email">Adresse Mail</label>
+      <input [(ngModel)]="user.email"
+             [ngClass]="{'is-valid':submitted && !invalidUser && formSignUp.controls['email'].valid,
+                         'is-invalid':submitted && invalidUser && formSignUp.controls['email'].invalid}"
+             autocomplete="disabled"
+             class="form-control"
+             type="email"
+             id="email"
+             name="email"
+             placeholder="Entrez votre Adresse Mail"
+             email
+             required>
+    </div>
+    <div *ngIf="submitted && invalidUser && formSignUp.controls['email'].invalid" [style.color]="'red'" class="errorMsg">
+      *L'email est invalid
+    </div>
+    <div>
+      <label for="mdp" class="mdp">Mot de passe</label>
+      <input [(ngModel)]="user.password"
+             [ngClass]="{'is-valid':submitted && !invalidUser && formSignUp.controls['mdp'].valid,
+                         'is-invalid':submitted && invalidUser && formSignUp.controls['mdp'].invalid}"
+             (keyup)="ValidatePassword()"
+             (focus)="showPasswordSuggestion()"
+             (focusout)="hidePasswordSuggestion()"
+             autocomplete="disabled"
+             type="password"
+             class="form-control"
+             placeholder="Entrez votre mot de passe"
+             name="mdp"
+             id="mdp"
+             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+             required>
+    </div>
+    <div *ngIf="submitted && invalidUser && formSignUp.controls['mdp'].invalid" [style.color]="'red'" class="errorMsg">
+      *Mot de passe invalid
+    </div>
+    <div class="message"  *ngIf="showMessage" >
+      <div>le Mot de passe doit contenir :</div>
+      <div [ngClass]="{'valid-password':lowerCaseLetter,'invalid-password':!lowerCaseLetter}" >Au moins une lettre Minuscule</div>
+      <div [ngClass]="{'valid-password':upperCaseLetter,'invalid-password':!upperCaseLetter}">Au moins une lettre Majuscule</div>
+      <div [ngClass]="{'valid-password':number,'invalid-password':!number}">Au moins un chiffre</div>
+      <div  [ngClass]="{'valid-password':length,'invalid-password':!length}">Au minimum 8 caractères</div>
+    </div>
+
+    <div>
+      <label for="rMdp" class="rmdp">Confirmer Mot de passe</label>
+      <input [(ngModel)]="confirmPassword"
+             [ngClass]="{'is-valid':submitted && !invalidUser && formSignUp.controls['rMdp'].valid,
+                         'is-invalid':submitted && invalidUser && formSignUp.controls['rMdp'].invalid}"
+             autocomplete="disabled"
+             type="password"
+             class="form-control"
+             id="rMdp"
+             name="rMdp"
+             placeholder="Retappez votre mot de passe"
+             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+             required>
+    </div>
+    <div *ngIf="(submitted && invalidUser && formSignUp.controls['rMdp'].invalid)||(submitted && confirmPassword !== user.password ) " [style.color]="'red'" class="errorMsg">
+      *Mot de passe n'est pas identique
+    </div>
+    <section class="section1">
+      <label class="sexe">Sexe</label>
+      <label> Femme </label>
+      <input [(ngModel)]="user.gender"
+             type="radio"
+             name="gender"
+             value="FEMALE"
+             class="checkbox">
+      <label> Homme </label>
+      <input [(ngModel)]="user.gender"
+             type="radio"
+             name="gender"
+             value="MALE"
+             class="checkbox">
+    </section>
+    <div>
+      <label for="dateDeNaissance" class="datenaissance">Date de Naissance</label>
+      <input [(ngModel)]="user.birthday"
+             [ngClass]="{'is-valid':submitted && !invalidUser && formSignUp.controls['dateDeNaissance'].valid,
+                         'is-invalid':submitted && invalidUser && formSignUp.controls['dateDeNaissance'].invalid}"
+             class="form-control"
+             type="date"
+             id="dateDeNaissance"
+             name="dateDeNaissance"
+             required>
+    </div>
+    <div *ngIf="submitted && invalidUser && formSignUp.controls['dateDeNaissance'].invalid" [style.color]="'red'" class="errorMsg">
+      *La date de naissance est invalid
+    </div>
+    <div>
+      <label for="Adresse" class="Adresse">Adresse</label>
+      <input [(ngModel)]="user.address"
+             class="form-control"
+             type="text"
+             id="Adresse"
+             placeholder="Entrez votre Adresse"
+             name="Adresse">
+    </div>
+
+    <section class="section2">
+      <button (click)="saveUser()"
+              pButton
+              label="Sauvgarder">
+      </button>
+    </section>
+  </div>
+</form>

@@ -26,7 +26,7 @@
     <p class="clear"></p>
   </div>
   <div class="connection">
-    <mat-icon (click)="navigateToLoginPage()">perm_identity</mat-icon>
+    <mat-icon (click)="navigateToLoginPage()" [style.cursor]="'pointer'">perm_identity</mat-icon>
     <span (click)="navigateToLoginPage()">{{loginButtonCaption()}}</span>
     <mat-icon class="logout" aria-hidden="false" [style.visibility]="iconLogoutVisibility" (click)="logout()">logout
     </mat-icon>

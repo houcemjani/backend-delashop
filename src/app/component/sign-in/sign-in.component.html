@@ -1,0 +1,90 @@
+<form #form="ngForm"
+      class="forms-sample"
+      autocomplete="off">
+
+  <h1>Connexion</h1>
+  <div>
+    <label for="Email" class="mail">Adresse E-Mail</label>
+  </div>
+  <div class="input-box">
+    <div>
+      <input #Email
+             [(ngModel)]="loginRequest.email"
+             (input)="reset()"
+             [ngClass]="{'is-valid':submitted && !invalidLoginRequest ,
+                             'is-invalid':submitted && invalidLoginRequest}"
+             class="form-control"
+             type="email"
+             name="email"
+             id="email"
+             required>
+    </div>
+  </div>
+
+  <div>
+    <label for="mdp" class="mdp">Mot de passe</label>
+  </div>
+  <div class="input-box">
+    <div>
+    <input #mdp
+           [(ngModel)]="loginRequest.password"
+           (input)="reset()"
+           [ngClass]="{'is-valid':submitted && !invalidLoginRequest,
+                             'is-invalid':submitted && invalidLoginRequest}"
+           class="form-control"
+           type="password"
+           name="mdp"
+           id="mdp"
+           required>
+      <div *ngIf="submitted &&  invalidLoginRequest " class="invalid-feedback erreur-mdp">
+        <p>* l'email ou le mot de passe et incorrect</p>
+      </div>
+
+    </div>
+  </div>
+  <div>
+
+    <button (click)="loginUser()" pButton label="LOGIN"></button>
+  </div>
+  <div class="mdpoublié">
+    <p (click)="showForgetPasswordDialogue()"   class="clickable" >Mot de passe oublié ?</p>
+  </div>
+  <div class="creercompt">
+    <p class="clickable"><span (click)="createAccountButton()">Créer un compte</span></p>
+  </div>
+  <div>
+    <label class="barre"></label>
+    <label class="ou">OU</label>
+    <label class="barre"></label>
+  </div>
+  <div>
+    <img class="img1" src="assets/img/f.png" alt="">
+    <img class="img2" src="assets/img/GMAIL.png" alt="">
+
+  </div>
+
+</form>
+
+<p-dialog [(visible)]="forgetPasswordDialogue" header="Mot de passe oublié"  [style]="{width: '30vw'}" class="mp">
+  <div *ngIf="!resetPasswordRequestIsSent">
+    <h4>Demande de reinitialisation du mot de passe</h4>
+    <p>Merci de saisir votre email afin de recevoir un email contenant le nouveau mot de passe de votre compte.</p>
+    <div class="form-group">
+      <label class="control-label">Email  </label>
+      <input type="email" name="email" [(ngModel)]="forgetPasswordDialogueEmail" placeholder="Email" class="form-control input-login" />
+    </div>
+  </div>
+  <div *ngIf="resetPasswordRequestIsSent">
+    <i class="fa fa-check-circle fa-5x" aria-hidden="true"></i>
+    <h4>Demande de reinitialisation du mot de passe</h4>
+    <p>Un nouveau mot de passe à été envoyé a votre boite email.</p>
+  </div>
+  <p-footer>
+    <button  type="button" *ngIf="!resetPasswordRequestIsSent" (click)="sendForgetPassword()" pButton  class="btn-meduium"
+             label="Valider" ></button>
+
+    <button type="button" *ngIf="resetPasswordRequestIsSent" (click)="closeResetPasswordDialog()" pButton  class="btn-meduium"
+            label="Fermer" ></button>
+  </p-footer>
+</p-dialog>
+<p-toast position="top-right"></p-toast>

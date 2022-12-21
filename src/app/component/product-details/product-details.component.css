@@ -1,0 +1,180 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+.global{
+    display:flex;
+    flex-direction: row;
+ 
+
+}
+.partieImg{
+   margin: 5px;
+   margin-left: 50px;
+   width: 80%;
+   display: flex;
+   justify-content: flex-end;
+   
+}
+
+.partieInformation{
+    margin: 10px;
+    margin-right: 50px;
+    width: 20%; 
+    
+}
+
+fieldset, legend {
+    all: revert;
+ }
+ legend{
+    font-size: 25px;
+    padding: 18px;
+ }
+ fieldset{
+    height: 100%;
+    border: solid black ;
+ }
+ i{
+    font-size: 25px;
+    margin: 6px;
+    
+ }
+ p{
+    margin:12px 20px;
+    font-weight: 600;
+ }
+ .avis{
+    color:orange;
+ }
+ select{
+    width: 90%;
+    padding:8px;
+    border: black solid;
+    border-radius: 20px;
+
+ }
+ .selectdiv{
+    text-align: center;
+ }
+ .labeltaille{
+    position:relative;
+    left:20px 
+    
+ }
+ input{
+    text-align: center;
+    width: 35%;
+    padding:8px;
+    border: black solid;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+ }
+ .quantite{
+    margin-top:30px;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 20px;
+ }
+ button{
+    background-color: red;
+    color:white;
+    width: 90%;
+    height: 47px;
+    border-radius: 20px;
+    font-size: 22px;
+    
+ }
+ .btn{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+    padding-top: 20px;
+ }
+
+.partieImg img{
+   margin-top:30px;
+   height: 70%;
+
+}
+.partieImg div{
+    width: 35%;
+
+    }
+.partieImg p{
+      text-decoration: underline;
+      font-weight: 600;
+
+}
+.apropos{
+   position:relative ;
+   margin :0px 46px ;
+   margin-bottom: 10px;
+   margin-top:0;
+  
+}
+
+.textblock img{
+   position:relative;
+   top:0px;
+   width: 100%;
+   height: 200px;
+   margin: 0;
+}
+.indispo{ 
+   color:red;
+   font-size: 20px;
+ }
+.dispo{ 
+   color:rgb(19, 207, 19);
+   font-size: 20px;
+ }
+
+ :host::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item,
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item-group {
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px;
+    color:black;
+    text-align: center;
+
+}
+:host::ng-deep .p-dropdown-panel:hover  .p-dropdown-items:hover  .p-dropdown-item:hover ,
+.p-dropdown-panel:hover  .p-dropdown-items:hover  .p-dropdown-item-group:hover {
+    background-color:aquamarine;
+}
+
+
+:host ::ng-deep .p-dropdown {
+   width: 90%;
+   border: solid black;
+   border-radius: 10px;
+   font-size: 20px;
+   font-weight: bold;
+   color:black;
+   margin:10px;
+ }
+.categorie{
+   margin:8px 0px;
+}
+label{
+   margin:8px ;
+   font-size: 18px;
+   font-weight: bold;
+}
+.productType{
+   margin-left:20px;
+   color:blue;
+}
+button:hover{
+background-color:aquamarine;
+color:blue;
+transition: 0.5s;
+letter-spacing: 2px;
+}
+.galleria-img{
+    width:250%;
+}
+:host::ng-deep .p-carousel{
+    width:110%;
+    margin-top: 30px;
+}

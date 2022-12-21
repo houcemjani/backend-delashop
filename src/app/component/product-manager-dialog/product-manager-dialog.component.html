@@ -1,0 +1,286 @@
+
+<form #productForm="ngForm"
+      class="forms-sample">
+  <div class="row">
+    <div  [ngClass]="{'col-md-4':!showHistory,'col-md-3':showHistory}">
+      <fieldset>
+        <legend>Informations du produit</legend>
+        <div>
+          <label for="refInput" class="label-inputs">Réference </label>
+          <input #refInput
+                 [(ngModel)]="product.reference"
+                 (input)="matchProductReference()"
+                 [disabled]="!isNew"
+                 [ngClass]="{'is-valid':submitted && productForm.controls['refInput'].valid && !matchedProductReference ,
+                             'is-invalid':submitted && productForm.controls['refInput'].invalid && matchedProductReference}"
+                 [ngClass]="{'is-invalid':matchedProductReference}"
+                 class="form-control"
+                 type="text"
+                 name="refInput"
+                 id="refInput"
+                 required>
+          <div *ngIf="submitted && productForm.controls['refInput'].invalid " class="invalid-feedback">
+            * la reference est obligatoire
+          </div>
+          <div *ngIf="matchedProductReference && product.reference !==undefined  && product.reference.length>0 " class="invalid-feedback">
+            * la reference exist déja
+          </div>
+
+        </div>
+        <div>
+          <label for="name" class="label-inputs">Nom</label>
+          <input [(ngModel)]="product.name"
+                 class="form-control"
+                 type="text"
+                 id="name"
+                 name="name"
+                 required
+                 [ngClass]="{'is-valid':submitted && productForm.controls['name'].valid,
+                 'is-invalid':submitted && productForm.controls['name'].invalid }">
+          <div class="invalid-feedback">
+            * le Nom est obligatoire
+          </div>
+        </div>
+        <label for="category" class="label-inputs">Catégorie:</label>
+        <div>
+          <p-dropdown [options]="categoryOptions"
+                      [(ngModel)]="product.category"
+                      [autoDisplayFirst]="false"
+                      [showClear]="true"
+                      class="form-control dropdown"
+                      placeholder="Choisir une Catégorie"
+                      name="category"
+                      styleClass="dd-style"
+                      id="category"
+                      [required]="true"
+                      [ngClass]="{'is-valid':submitted && productForm.controls['category'].valid,
+                                 'is-invalid':submitted && productForm.controls['category'].invalid }">
+          </p-dropdown>
+          <div class="invalid-feedback">
+           * la Category est obligatoire
+          </div>
+        </div>
+        <label for="type" class="label-inputs">Type</label>
+        <div>
+          <p-dropdown [options]="typeOptions"
+                      [(ngModel)]="product.type"
+                      [autoDisplayFirst]="false"
+                      [showClear]="true"
+                      placeholder="Choisir un type"
+                      class="form-control dropdown"
+                      name="type"
+                      styleClass="dd-style"
+                      id="type"
+                      [required]="true"
+                      [ngClass]="{'is-valid':submitted && productForm.controls['type'].valid,
+                 'is-invalid':submitted && productForm.controls['type'].invalid }">
+          </p-dropdown>
+          <div class="invalid-feedback">
+            * le Type est obligatoire
+          </div>
+        </div>
+        <label for="status" class="label-inputs">Status</label>
+        <div>
+          <p-dropdown [options]="statusOptions"
+                      [(ngModel)]="product.status"
+                      [autoDisplayFirst]="false"
+                      [showClear]="true"
+                      class="form-control dropdown"
+                      placeholder="Choisir un status"
+                      name="status"
+                      styleClass="dd-style"
+                      id="status">
+          </p-dropdown>
+        </div>
+        <div>
+          <label for="price" class="label-inputs">Prix</label>
+          <input [(ngModel)]="product.price"
+                 class="form-control"
+                 type="number"
+                 name="price"
+                 id="price"
+                 required
+                 [ngClass]="{'is-valid':submitted && productForm.controls['price'].valid,
+                 'is-invalid':submitted && productForm.controls['price'].invalid }">
+          <div class="invalid-feedback">
+            * le Prix est obligatoire
+          </div>
+        </div>
+<!--        <p-toast></p-toast>-->
+        <label class="label-inputs">Images</label>
+        <div *ngIf="images.length>0">
+          <p-carousel [value]="images"
+                      [autoplayInterval]="5000"
+                      [circular]="false"
+                      [numVisible]="1"
+                      [numScroll]="1">
+            <ng-template pTemplate="item" let-fileName >
+              <div class="remouve-btn">
+                <button (click)="deleteImg(fileName)" pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger "></button>
+              </div>
+              <div >
+                <img [src]="'/rest/product-manager/download/'+fileName"  alt="image not found" class="galleria-img"   />
+              </div>
+
+            </ng-template>
+          </p-carousel>
+        </div>
+        <p-fileUpload name="images[]"
+                      #fileUpload
+                      (uploadHandler)="onUpload($event)"
+                      [customUpload]="true"
+                      [multiple]="true" accept="image/*"
+                      [maxFileSize]="1000000"
+                      chooseLabel="Importer"
+                      uploadLabel="Télécharger"
+                      cancelLabel="Annuler">
+        </p-fileUpload>
+      </fieldset>
+    </div>
+    <div  [ngClass]="{'col-md-8':!showHistory,'col-md-5':showHistory}">
+      <fieldset>
+        <legend>Détails du produit</legend>
+        <p-table #dt
+                 [value]="product.details"
+                 [columns]="cols">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <ng-container *ngFor="let col of columns">
+                <th [style.width]="col.width">{{col.header}}
+                </th>
+              </ng-container>
+              <ng-container>
+                <th style="width: 4rem">
+                  <button (click)="addDetailDialog()"
+                          pButton
+                          type="button"
+                          class="p-button-secondary"
+                          icon="fa fa-plus">
+                  </button>
+                </th>
+              </ng-container>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-detail let-columns="columns" let-row="rowIndex">
+            <tr
+                (dblclick)="displayHistory(detail)"
+                (click)="hideHistory()"
+                [ngStyle]="{'cursor': 'pointer'}" >
+              <ng-container *ngFor="let col of columns">
+                <td [ngSwitch]="col.type" [style.width]="col.width">
+                  <span *ngSwitchCase="'price'" lass="p-text-bold p-ml-2">{{detail[col.field] + ' ' + 'TND'}}</span>
+                  <span *ngSwitchDefault>{{detail[col.field]}}</span>
+                </td>
+              </ng-container>
+              <ng-container>
+                <td style="width: 6rem">
+                  <button (click)="updateDetailDialog(detail)"
+                          class="p-button-secondary"
+                          pButton icon="fa fa-plus">
+                  </button>
+                  <button (click)="delete(row)"
+                          class="p-button-secondary"
+                          pButton icon="fa fa-trash-o">
+                  </button>
+                </td>
+              </ng-container>
+            </tr>
+          </ng-template>
+        </p-table>
+      </fieldset>
+    </div>
+    <div *ngIf="showHistory===true" class="col-md-4">
+      <fieldset>
+        <legend>Historique</legend>
+        <app-product-history [productDetail]="productDetail">
+        </app-product-history>
+      </fieldset>
+    </div>
+  </div>
+</form>
+
+<p-dialog
+        [(visible)]="showAddDetailDialog"
+        [modal]="true"
+        [style]="{width: '70vw'}"
+        [baseZIndex]="10000"
+        [draggable]="false"
+        [resizable]="false">
+  <div class="new-details">
+    <span>
+      <label for="new-ref" class="label-inputs">Réference </label>
+      <input [(ngModel)]="productDetail.reference"
+             (input)="matchDetailReference()"
+             [disabled]="!isNewDetail"
+             class="form-control"
+             pInputText
+             type="text"
+             name="new-ref"
+             id="new-ref"
+             [ngClass]="{'is-invalid':matchedDetailReference}">
+      <div class="invalid-feedback">
+        Cette reference exist déja
+      </div>
+    </span>
+    <span>
+      <label for="new-size" class="label-inputs">taille </label>
+      <input [(ngModel)]="productDetail.size"
+             (input)="matchDetail()"
+             [disabled]="!isNewDetail"
+             class="form-control"
+             pInputText type="text"
+             name="new-size"
+             id="new-size"
+             [ngClass]="{'is-invalid':matchedDetail}">
+      <div class="invalid-feedback">
+        Cette detail exist déja
+      </div>
+    </span>
+    <span>
+      <label for="new-color" class="label-inputs">Color </label>
+      <input [(ngModel)]="productDetail.color"
+             [disabled]="!isNewDetail"
+             (input)="matchDetail()"
+             class="form-control"
+             pInputText
+             type="text"
+             name="new-color"
+             id="new-color"
+             [ngClass]="{'is-invalid':matchedDetail}">
+    </span>
+    <span>
+      <label for="new-quantity" class="label-inputs">Quantité </label>
+      <input [(ngModel)]="productDetail.quantity"
+             class="form-control"
+             pInputText
+             type="number"
+             name="new-quantity"
+             id="new-quantity">
+    </span>
+    <span>
+      <label for="purchuse-price" class="label-inputs">Prix d'achat </label>
+      <input [(ngModel)]="productDetail.purchasePrice"
+             class="form-control"
+             pInputText
+             type="number"
+             name="purchuse-price"
+             id="purchuse-price">
+    </span>
+    <span>
+      <label for="outOfStock" class="label-inputs">Seuil </label>
+      <input [(ngModel)]="productDetail.limit"
+             class="form-control"
+             pInputText
+             type="number"
+             name="outOfStock"
+             id="outOfStock">
+    </span>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button (onClick)="addProductDetail()"
+              icon="pi pi-check"
+              label="Enregister le détail"
+              class="p-button-text"></p-button>
+    <p-button icon="pi pi-times" (click)="cancel()" label="Annuler"></p-button>
+  </ng-template>
+</p-dialog>

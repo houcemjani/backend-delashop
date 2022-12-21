@@ -1,0 +1,99 @@
+fieldset, legend {
+    all: revert;
+}
+legend{
+    font-size: 33px;
+}
+fieldset{
+    border: solid black 2px ;
+    margin-top:20px;
+    height:727px;
+    overflow:scroll;
+}
+.label-inputs{
+    margin :15px 10px;
+}
+:host::ng-deep .p-dropdown{
+    width:100%;
+    border-radius: 5px;
+}
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    border: none;
+    text-align: center;
+
+}
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    border: none;
+    text-align: center;
+
+}
+:host ::ng-deep .p-datatable .p-datatable-thead> tr:first-child > th:last-child {
+    background-color:white;
+}
+
+p {
+    font-family: Lato;
+}
+
+#root {
+    padding: 30px;
+}
+
+.register-form {
+    max-width: 350px;
+    margin: auto;
+}
+.new-details{
+    display:flex;
+    justify-content: space-between;
+}
+tr > td >  button{
+    margin:5px 5px;
+}
+*:disabled {
+    background:#CCC;
+    color: black;
+    opacity: 1;
+}
+:host ::ng-deep .p-dropdown {
+    margin:0px;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    background-color: white;
+    border:none;
+    box-shadow:none;
+}
+:host ::ng-deep .p-dropdown:focus {
+    box-shadow:none;
+}
+.dropdown{
+    padding:0px;
+}
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr:nth-child(odd) > td {
+    background: #CCCC
+}
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr:nth-child(even) > td {
+    background-color: white;
+}
+:host ::ng-deep .p-datatable .p-datatable-thead > tr:last-child > th {
+    padding: 15px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody tr:hover > td {
+    background-color: aquamarine !important;
+}
+.galleria-img{
+    width:90%;
+    height: 350px;
+}
+:host ::ng-deep .p-carousel{
+    width:100%;
+}
+.remouve-btn{
+    display:flex;
+    justify-content: flex-end;
+}
+
+
+

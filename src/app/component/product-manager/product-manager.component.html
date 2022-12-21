@@ -1,0 +1,135 @@
+<p-table #dt
+         [value]="products"
+         [columns]="cols"
+         [lazy]="true"
+         (onLazyLoad)="loadProducts($event)"
+         [paginator]="true"
+         [rows]="limit"
+         [first]="first"
+         [totalRecords]="totalRecords"
+         [loading]="loading"
+         [rowGroupMode]="'rowspan'"
+         [groupRowsBy]="'name'"
+         tableStyleClass="tableBorder">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <ng-container>
+        <th colspan="5">Produit</th>
+        <th colspan="4">Détails</th>
+        <th style="width: 4rem">
+          <button (click)="displayProductDialog(true, null)"
+                  pButton
+                  type="button"
+                  class="p-button-secondary"
+                  icon="fa fa-plus">
+          </button>
+        </th>
+      </ng-container>
+    </tr>
+    <tr>
+      <ng-container *ngFor="let col of columns">
+        <th [style.width]="col.width">{{col.header}}</th>
+      </ng-container>
+      <ng-container>
+
+      </ng-container>
+    </tr>
+    <tr class="row-bottom">
+      <ng-container *ngFor="let col of columns">
+        <th [ngSwitch]="col.filterType" [style.width]="col.width">
+          <p-dropdown *ngSwitchCase="'dropdown'"
+                      [options]="col.options"
+                      [ngModel]="dt.filters[col.filter] ? getFilter(col) : undefined"
+                      [autoDisplayFirst]="false"
+                      [showClear]="true"
+                      (onChange)="dt.filter(getValue($event),col.filter,'contains')"
+                      pInputText
+                      type="search">
+          </p-dropdown>
+          <input *ngSwitchDefault
+                 [ngModel]="dt.filters[col.filter] ? getFilter(col) : undefined"
+                 (input)="dt.filter(getValue($event),col.filter,'contains')"
+                 pInputText
+                 type="search">
+        </th>
+      </ng-container>
+      <ng-container>
+        <th style="width: 4rem"></th>
+      </ng-container>
+    </tr>
+  </ng-template>
+  <ng-template
+      let-product
+      pTemplate="body"
+      let-columns="columns"
+      let-rowgroup="rowgroup"
+      let-rowspan="rowspan">
+
+    <tr>
+      <!--      <ng-container *ngFor="let col of columns" [ngSwitch]="col.type">-->
+      <!--        <td [ngSwitch]="col.type" [style.width]="col.width">-->
+      <!--          <span *ngSwitchCase="'name' " lass="p-text-bold p-ml-2">-->
+      <!--                <img [src]="product.imgPath" alt="">-->
+      <!--                <div>{{product[col.field]}}</div>-->
+      <!--          </span>-->
+      <!--          <span *ngSwitchCase="'price'" lass="p-text-bold p-ml-2">{{product[col.field] + ' ' + 'TND'}}</span>-->
+      <!--          <span *ngSwitchDefault>{{product[col.field]}}</span>-->
+      <!--        </td>-->
+      <!--      </ng-container>-->
+
+      <td *ngIf="rowgroup" [attr.rowspan]="rowspan">
+                <span class="p-text-bold p-ml-2">
+                  <img [src]="'/rest/product-manager/download/'+getImage(product.imgPath)" alt="">
+                  <div>{{product.name}}</div>
+                </span>
+      </td>
+      <td *ngIf="rowgroup" [attr.rowspan]="rowspan">
+        <span class="p-text-bold p-ml-2">{{product.price}} TND</span>
+      </td>
+      <td *ngIf="rowgroup" [attr.rowspan]="rowspan">
+        <span class="p-text-bold p-ml-2">{{product.category}}</span>
+      </td>
+      <td *ngIf="rowgroup" [attr.rowspan]="rowspan">
+        <span class="p-text-bold p-ml-2">{{product.type}}</span>
+      </td>
+      <td *ngIf="rowgroup" [attr.rowspan]="rowspan">
+        <span class="p-text-bold p-ml-2">{{product.status}}</span>
+      </td>
+      <td [ngClass]="{'outOfStock':outOfStock(product)}">{{product.reference}}</td>
+      <td [ngClass]="{'outOfStock':outOfStock(product)}">{{product.size}}</td>
+      <td [ngClass]="{'outOfStock':outOfStock(product)}">{{product.color}}</td>
+      <td [ngClass]="{'outOfStock':outOfStock(product)}">{{product.quantity}}</td>
+
+      <td *ngIf="rowgroup" [attr.rowspan]="rowspan">
+        <button (click)="displayProductDialog(false, product.id)"
+                pButton type="button"
+                class="p-button-secondary"
+                icon="fa fa-eye">
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="display"
+          [modal]="true"
+          [style]="{width: '98%',height:'100%'}"
+          [baseZIndex]="10000"
+          [draggable]="false"
+          [resizable]="false">
+
+  <app-product-manager-dialog #productManager
+                              [product]="product"
+                              [isNew]="isNew">
+  </app-product-manager-dialog>
+
+  <ng-template pTemplate="footer">
+    <p-button (click)="save()"
+              icon="pi pi-check"
+              label="Enregister le produit"
+              class="p-button-text"></p-button>
+    <p-button icon="pi pi-times" (click)="cancel()" label="Annuler"></p-button>
+  </ng-template>
+</p-dialog>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<p-toast></p-toast>

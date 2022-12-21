@@ -34,7 +34,15 @@ import {ProductManagerComponent} from './component/product-manager/product-manag
 import {DialogModule} from 'primeng/dialog';
 import { ProductManagerDialogComponent } from './component/product-manager-dialog/product-manager-dialog.component';
 import { ProductHistoryComponent } from './component/product-history/product-history.component';
-
+import{ReactiveFormsModule} from "@angular/forms";
+import {FileUploadModule} from 'primeng/fileupload';
+import {MessageService} from "primeng/api";
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {ToastModule} from "primeng/toast";
+import {GalleriaModule} from 'primeng/galleria';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -55,7 +63,6 @@ import { ProductHistoryComponent } from './component/product-history/product-his
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
     CommonModule,
     BrowserAnimationsModule,
@@ -75,14 +82,24 @@ import { ProductHistoryComponent } from './component/product-history/product-his
     BadgeModule,
     TableModule,
     CheckboxModule,
-    DialogModule
+    DialogModule,
+    ReactiveFormsModule,
+    FileUploadModule,
+    MessagesModule,
+    MessageModule,
+    ToastModule,
+    GalleriaModule,
+    ConfirmDialogModule,
+
   ],
 
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
+  },
+    MessageService,
+    ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
